@@ -1,15 +1,28 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Products from "./products/Products";
+import ErrorPage from "./common/ErrorPage";
+import ProductEditDelete from "./products/ProductEditDelete";
+import ProductList from "./products/ProductList";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 export default function App() {
-  const queryClient = new QueryClient();
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <ProductList />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "products/:productId",
+      element: <ProductEditDelete />,
+      errorElement: <ErrorPage />,
+    },
+  ]);
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <h1 className="text-3xl font-bold underline bg-red-200">Hello world!</h1>
       <div className="w-3/4 mx-auto font-dosis">
-        <Products />
+        <RouterProvider router={router} />
       </div>
-    </QueryClientProvider>
+    </>
   );
 }

@@ -11,7 +11,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
       <h2 className="text-xl font-bold mb-5">{product.title}</h2>
       <img className="" src={product.images[0]} />
       <p>{product.category.name}</p>
-      <p>{product.title}</p>
+      <p>{product.description}</p>
       <p>{product.price}</p>
     </div>
   );

@@ -4,6 +4,7 @@ import { Product } from "../types";
 import ProductDetail from "./components/ProductDetail";
 import Spinner from "../ui/Spinner";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const ProductList = () => {
   const {
@@ -23,6 +24,10 @@ const ProductList = () => {
   }
 
   return (
+    <div>
+      <Link to="/products/new">
+      <Button className="bg-green-600 hover:bg-green-500">New product</Button>
+      </Link>
     <div className="grid grid-cols-4">
       {products.map((product) => {
         return (
@@ -31,6 +36,7 @@ const ProductList = () => {
           </Link>
         );
       })}
+    </div>
     </div>
   );
 };

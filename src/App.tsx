@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import ErrorPage from "./common/ErrorPage";
+import ProductEditDelete from "./products/ProductEditDelete";
+import ProductList from "./products/ProductList";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ProductNew from "./products/components/ProductNew";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <ProductList />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/products",
+      element: <ProductList />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/products/new",
+      element: <ProductNew />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "products/:productId",
+      element: <ProductEditDelete />,
+      errorElement: <ErrorPage />,
+    },
+  ]);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 className="text-3xl font-bold font-dosis bg-blue-100 p-4 border-4 border-blue-400">Simple product CRUD app</h1>
+      <p className="italic mb-4">Note: Updating category or images does not work correctly so I omitted them from the update</p>
+      <p className="italic mb-4">Note 2: The API is public so there might be a lot people using it and there might exist a race condition</p>
+      <p className="italic mb-4">Note 3: Scroll down to see new products</p>
+      <p className="italic mb-4">Note 4: The API is not parsing the image urls correctly so they won't render</p>
+      <div className="w-3/4 mx-auto font-dosis">
+        <RouterProvider router={router} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
-
-export default App

@@ -29,7 +29,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enumToId } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const formSchema = z.object({
   title: z.string().min(1, { message: "Required field" }),

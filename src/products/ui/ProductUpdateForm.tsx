@@ -187,7 +187,7 @@ export const ProductUpdateForm: FC<Props> = ({ product }) => {
               className="mb-4 bg-blue-300 hover:bg-blue-100"
               type="submit"
             >
-              Actualizar
+              Update
             </Button>
             {/* </AlertDialogCancel> */}
           </>

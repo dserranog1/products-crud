@@ -29,6 +29,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enumToId } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 
 const formSchema = z.object({
   title: z.string().min(1, { message: "Required field" }),
@@ -105,146 +106,159 @@ const ProductNew = () => {
     });
   };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex gap-2">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Product title" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Product description" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="price"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Price *</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Price"
-                  {...field}
-                  onChange={(event) => field.onChange(+event.target.value)}
+    <>
+      <Card className="max-w-xl m-auto">
+        <CardHeader>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <div className="flex gap-2">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Product title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Category *</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Seleccione una" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value={Categories.clothes}>
-                    {Categories.clothes}
-                  </SelectItem>
-                  <SelectItem value={Categories.electronics}>
-                    {Categories.electronics}
-                  </SelectItem>
-                  <SelectItem value={Categories.furniture}>
-                    {Categories.furniture}
-                  </SelectItem>
-                  <SelectItem value={Categories.shoes}>
-                    {Categories.shoes}
-                  </SelectItem>
-                  <SelectItem value={Categories.miscellaneous}>
-                    {Categories.miscellaneous}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="first_image"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Image *</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="second_image"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Image two</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="third_image"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Image three</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {createProductMutation.isPending ? (
-          <Button disabled>
-            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            Procesando
-          </Button>
-        ) : (
-          <>
-            {/* <AlertDialogCancel asChild> */}
-            <Button
-              className="mb-4 bg-blue-300 hover:bg-blue-100"
-              type="submit"
-            >
-              Create
-            </Button>
-            {/* </AlertDialogCancel> */}
-          </>
-        )}
-      </form>
-    </Form>
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Product description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price *</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Price"
+                        {...field}
+                        onChange={(event) =>
+                          field.onChange(+event.target.value)
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category *</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Seleccione una" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value={Categories.clothes}>
+                          {Categories.clothes}
+                        </SelectItem>
+                        <SelectItem value={Categories.electronics}>
+                          {Categories.electronics}
+                        </SelectItem>
+                        <SelectItem value={Categories.furniture}>
+                          {Categories.furniture}
+                        </SelectItem>
+                        <SelectItem value={Categories.shoes}>
+                          {Categories.shoes}
+                        </SelectItem>
+                        <SelectItem value={Categories.miscellaneous}>
+                          {Categories.miscellaneous}
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="first_image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="second_image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image two</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="third_image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image three</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {createProductMutation.isPending ? (
+                <Button disabled>
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Procesando
+                </Button>
+              ) : (
+                <>
+                  {/* <AlertDialogCancel asChild> */}
+                  <Button
+                    className="mb-4 bg-blue-300 hover:bg-blue-100"
+                    type="submit"
+                  >
+                    Create
+                  </Button>
+                  {/* </AlertDialogCancel> */}
+                </>
+              )}
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </>
   );
 };
 

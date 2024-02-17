@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Product } from "../../types";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Props {
   product: Product;
@@ -7,16 +8,20 @@ interface Props {
 
 const ProductDetail: FC<Props> = ({ product }) => {
   return (
-    <div className="border-8 p-3 border-green-200 max-w-xl m-3">
-      <h2 className="text-xl font-bold mb-5">{product.title}</h2>
-      <img className="" src={product.images[0]} />
-      <div className="mt-6">
-        <span>
-          Category: <p className="font-bold">{product.category.name}</p>
-        </span>
-      </div>
-      <p className="italic mt-2">{product.description}</p>
-      <p>{product.price}</p>
+    <div className="m-2 max-w-xl">
+      <Card>
+        <CardHeader>
+          <CardTitle>{product.title}</CardTitle>
+          <CardDescription>{product.category.name}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <img className="mb-8" src={product.images[0]} />
+          <span className="italic">{product.description}</span>
+        </CardContent>
+        <CardFooter>
+          <p className="bold text-xl">{product.price}$</p>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
